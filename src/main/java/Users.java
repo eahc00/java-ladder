@@ -1,33 +1,30 @@
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Users {
 
     private static final int USER_NUMBER = 4;
-    public List<User> users;
+    private final List<User> users;
 
     public Users(String... usernames) {
-        validateUsername(Arrays.asList(usernames));
-        this.users = Arrays.asList(usernames)
-                .stream()
-                .map(User::new)
-                .collect(Collectors.toList());
+        this(Arrays.asList(usernames));
     }
 
     public Users(List<String> usernames) {
-        validateUsername(usernames);
+        validateUserNumber(usernames);
         this.users = usernames.stream()
                 .map(User::new)
                 .collect(Collectors.toList());
     }
 
-    private static void validateUsername(List<String> users) {
+    private void validateUserNumber(List<String> users) {
         if (users.size() != USER_NUMBER) {
             throw new RuntimeException();
         }
     }
 
-
+    public List<User> getUsers() {
+        return this.users;
+    }
 }
