@@ -4,25 +4,24 @@ import java.util.List;
 public class Ladder {
 
     private final List<Line> lines = new ArrayList<>();
-    private final Users users;
 
-    public Ladder(Users users, int height, BooleanGenerator generator) {
-        this.users = users;
-        //TODO
-        initLadder(height, generator);
+    public Ladder(int personCount, int height, BooleanGenerator generator) {
+        initLadder(personCount, height, generator);
     }
 
-    private void initLadder(int height, BooleanGenerator generator) {
+    private void initLadder(int personCount, int height, BooleanGenerator generator) {
         for (int i = 0; i < height; i++) {
-            lines.add(new Line(users.getUsers().size(), generator));
+            lines.add(new Line(personCount, generator));
+        }
+    }
+
+    public void generatorUserResult(User user) {
+        for (Line line : lines) {
+            line.move(user);
         }
     }
 
     public List<Line> getLines() {
         return lines;
-    }
-
-    public Users getUsers() {
-        return users;
     }
 }

@@ -18,6 +18,17 @@ public class Line {
         return generator.generate();
     }
 
+    public void move(User user) {
+        int currentLocation = user.getState();
+        if (currentLocation - 1 >= 0 && points.get(currentLocation-1)) {
+            user.moveLeft();
+            return ;
+        }
+        if (currentLocation < points.size() && points.get(currentLocation)) {
+            user.moveRight();
+        }
+    }
+
     public List<Boolean> getPoints() {
         return points;
     }

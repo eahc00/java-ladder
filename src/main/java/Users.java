@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -5,7 +6,7 @@ import java.util.stream.Collectors;
 public class Users {
 
     private static final int USER_NUMBER = 4;
-    private final List<User> users;
+    private List<User> users = new ArrayList<>();
 
     public Users(String... usernames) {
         this(Arrays.asList(usernames));
@@ -13,9 +14,10 @@ public class Users {
 
     public Users(List<String> usernames) {
         validateUserNumber(usernames);
-        this.users = usernames.stream()
-                .map(User::new)
-                .collect(Collectors.toList());
+
+        for (int i = 0; i < USER_NUMBER; i++) {
+            this.users.add(new User(usernames.get(i), i));
+        }
     }
 
     private void validateUserNumber(List<String> users) {

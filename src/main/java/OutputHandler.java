@@ -1,8 +1,8 @@
 import java.util.stream.Collectors;
 
 public class OutputHandler {
-    public static void printLadder(Ladder ladder) {
-        printUsers(ladder.getUsers());
+    public static void printLadder(Users users, Ladder ladder) {
+        printUsers(users);
         for (Line line : ladder.getLines()) {
             printLine(line);
         }

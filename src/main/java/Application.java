@@ -7,7 +7,7 @@ public class Application {
 
         RandomBooleanGenerator generator = new RandomBooleanGenerator();
 
-        Ladder ladder = new Ladder(users, height, generator);
-        OutputHandler.printLadder(ladder);
+        Ladder ladder = new Ladder(users.getUsers().size(), height, generator);
+        OutputHandler.printLadder(users, ladder);
     }
 }
