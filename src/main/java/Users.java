@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class Users {
 
     private static final int USER_NUMBER = 4;
-    private List<User> users = new ArrayList<>();
+    private final List<User> users = new ArrayList<>();
 
     public Users(String... usernames) {
         this(Arrays.asList(usernames));
@@ -24,6 +24,13 @@ public class Users {
         if (users.size() != USER_NUMBER) {
             throw new RuntimeException();
         }
+    }
+
+    public User getUserByUsername(String username) {
+        return users.stream()
+                .filter(it -> it.getName().equals(username))
+                .findAny()
+                .orElseThrow(() -> new RuntimeException("찾는 유저가 없습니다"));
     }
 
     public List<User> getUsers() {

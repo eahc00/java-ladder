@@ -21,6 +21,12 @@ public class Ladder {
         }
     }
 
+    public void generatorAllResult(Users users) {
+        for (User user : users.getUsers()) {
+            generatorUserResult(user);
+        }
+    }
+
     public List<Line> getLines() {
         return lines;
     }

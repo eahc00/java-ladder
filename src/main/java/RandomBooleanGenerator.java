@@ -6,6 +6,6 @@ public class RandomBooleanGenerator implements BooleanGenerator {
 
     @Override
     public boolean generate() {
-        return random.nextFloat() > 0.25;
+        return random.nextFloat() > 0.45;
     }
 }
