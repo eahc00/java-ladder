@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 public class Users {
 
-    private static final int USER_NUMBER = 4;
     private final List<User> users = new ArrayList<>();
 
     public Users(String... usernames) {
@@ -15,14 +14,14 @@ public class Users {
     public Users(List<String> usernames) {
         validateUserNumber(usernames);
 
-        for (int i = 0; i < USER_NUMBER; i++) {
+        for (int i = 0; i < usernames.size(); i++) {
             this.users.add(new User(usernames.get(i), i));
         }
     }
 
     private void validateUserNumber(List<String> users) {
-        if (users.size() != USER_NUMBER) {
-            throw new RuntimeException();
+        if (users.size() < 2) {
+            throw new RuntimeException("사다리타기가 가능한 최소 인원은 2명입니다.");
         }
     }
 
