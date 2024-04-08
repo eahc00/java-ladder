@@ -7,11 +7,11 @@ public class Application {
 
         BooleanGenerator generator = new RandomBooleanGenerator();
 
-        Ladder ladder = new Ladder(users.getUsers().size(), height, generator);
+        Ladder ladder = new Ladder(users, height, generator);
         OutputHandler.printLadder(users, ladder, destination);
 
-        ladder.generateAllResult(users);
-        
+        ladder.playLadderGameForAllUsers(users);
+
         while (true) {
             String username = InputHandler.inputUser();
             if (username.equals("all")) {

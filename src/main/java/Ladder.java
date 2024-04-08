@@ -6,23 +6,23 @@ public class Ladder {
     private final List<Line> lines = new ArrayList<>();
 
 
-    public Ladder(int personCount, int height, BooleanGenerator generator) {
-        initLadder(personCount, height, generator);
+    public Ladder(Users users, int height, BooleanGenerator generator) {
+        initLadder(users, height, generator);
     }
 
-    private void initLadder(int personCount, int height, BooleanGenerator generator) {
+    private void initLadder(Users users, int height, BooleanGenerator generator) {
         for (int i = 0; i < height; i++) {
-            lines.add(new Line(personCount, generator));
+            lines.add(new Line(users.getUsers().size(), generator));
         }
     }
 
-    public void generateAllResult(Users users) {
+    public void playLadderGameForAllUsers(Users users) {
         for (User user : users.getUsers()) {
-            generateUserResult(user);
+            playLadderGameForUser(user);
         }
     }
 
-    private void generateUserResult(User user) {
+    private void playLadderGameForUser(User user) {
         for (Line line : lines) {
             line.move(user);
         }
