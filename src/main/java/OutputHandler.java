@@ -1,11 +1,13 @@
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputHandler {
-    public static void printLadder(Ladder ladder) {
-        printUsers(ladder.getUsers());
+    public static void printLadder(Users users, Ladder ladder, Destination destination) {
+        printUsers(users);
         for (Line line : ladder.getLines()) {
             printLine(line);
         }
+        printDestination(destination);
     }
 
     private static void printUsers(Users users) {
@@ -27,5 +29,24 @@ public class OutputHandler {
             return "-----";
         }
         return "     ";
+    }
+
+    public static void printDestination(Destination destination) {
+        String result = destination.getDestination().stream()
+                .map(it -> String.format("%6s", it))
+                .collect(Collectors.joining());
+        System.out.println(result);
+    }
+
+    public static void printUserResult(Destination destination, User user) {
+        System.out.println("실행 결과");
+        System.out.println(destination.getUserDestination(user));
+    }
+
+    public static void printAllResult(Destination destination, Users users) {
+        System.out.println("실행 결과");
+        for (User user : users.getUsers()) {
+            System.out.println(user.getName() + " : " + destination.getUserDestination(user));
+        }
     }
 }
