@@ -1,13 +1,13 @@
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.print.attribute.standard.Destination;
 
 public class OutputHandler {
-    public static void printLadder(Users users, Ladder ladder) {
+    public static void printLadder(Users users, Ladder ladder, Destination destination) {
         printUsers(users);
         for (Line line : ladder.getLines()) {
             printLine(line);
         }
+        printDestination(destination);
     }
 
     private static void printUsers(Users users) {
@@ -31,27 +31,22 @@ public class OutputHandler {
         return "     ";
     }
 
-    public static void printDestination(List<String> destination) {
-        String result = destination.stream()
+    public static void printDestination(Destination destination) {
+        String result = destination.getDestination().stream()
                 .map(it -> String.format("%6s", it))
                 .collect(Collectors.joining());
         System.out.println(result);
     }
 
-    public static void printResult(String username, Users users, Ladder ladder, List<String> destination) {
-        if (username.equals("all")) {
-            printAll(users, ladder, destination);
-        } else {
-            User user = users.getUserByUsername(username);
-            ladder.generatorUserResult(user);
-            System.out.println(destination.get(user.getState()));
-        }
+    public static void printUserResult(Destination destination, User user) {
+        System.out.println("실행 결과");
+        System.out.println(destination.getUserDestination(user));
     }
 
-    private static void printAll(Users users, Ladder ladder, List<String> destination) {
-        ladder.generatorAllResult(users);
+    public static void printAllResult(Destination destination, Users users) {
+        System.out.println("실행 결과");
         for (User user : users.getUsers()) {
-            System.out.println(user.getName() + " : " + destination.get(user.getState()));
+            System.out.println(user.getName() + " : " + destination.getUserDestination(user));
         }
     }
 }

@@ -1,20 +1,26 @@
-import java.util.List;
-
 public class Application {
 
     public static void main(String[] args) {
         Users users = InputHandler.inputUsername();
         int height = InputHandler.inputHeight();
-        List<String> destination = InputHandler.inputDestination();
+        Destination destination = new Destination(users, InputHandler.inputDestination());
 
-        RandomBooleanGenerator generator = new RandomBooleanGenerator();
+        BooleanGenerator generator = new RandomBooleanGenerator();
 
         Ladder ladder = new Ladder(users.getUsers().size(), height, generator);
-        OutputHandler.printLadder(users, ladder);
-        OutputHandler.printDestination(destination);
+        OutputHandler.printLadder(users, ladder, destination);
 
-        String username = InputHandler.inputUser();
-        System.out.println("실행결과");
-        OutputHandler.printResult(username, users, ladder, destination);
+        ladder.generateAllResult(users);
+        
+        while (true) {
+            String username = InputHandler.inputUser();
+            if (username.equals("all")) {
+                OutputHandler.printAllResult(destination, users);
+                break;
+            }
+            User user = users.getUserByUsername(username);
+            OutputHandler.printUserResult(destination, user);
+        }
     }
 }
+

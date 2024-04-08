@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Line {
 
-    private List<Boolean> points = new ArrayList<>();
+    private final List<Boolean> points = new ArrayList<>();
 
     public Line(int personCount, BooleanGenerator generator) {
         for (int i = 0; i < personCount - 1; i++) {
@@ -12,7 +12,7 @@ public class Line {
     }
 
     private boolean generateValidPoint(BooleanGenerator generator) {
-        if (!points.isEmpty() && points.get(points.size()-1)) {
+        if (!points.isEmpty() && points.get(points.size() - 1)) {
             return false;
         }
         return generator.generate();
@@ -20,13 +20,21 @@ public class Line {
 
     public void move(User user) {
         int currentLocation = user.getState();
-        if (currentLocation - 1 >= 0 && points.get(currentLocation-1)) {
+        if (canMoveLeft(currentLocation)) {
             user.moveLeft();
-            return ;
+            return;
         }
-        if (currentLocation < points.size() && points.get(currentLocation)) {
+        if (canMoveRight(currentLocation)) {
             user.moveRight();
         }
+    }
+
+    private boolean canMoveLeft(int currentLocation) {
+        return currentLocation - 1 >= 0 && points.get(currentLocation - 1);
+    }
+
+    private boolean canMoveRight(int currentLocation) {
+        return currentLocation < points.size() && points.get(currentLocation);
     }
 
     public List<Boolean> getPoints() {

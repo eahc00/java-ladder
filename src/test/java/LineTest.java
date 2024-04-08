@@ -20,7 +20,6 @@ class LineTest {
 
         // then
         assertThat(line.getPoints().size()).isEqualTo(3);
-
     }
 
     @Test
@@ -43,6 +42,7 @@ class LineTest {
         Line line = new Line(4, new TestBooleanGenerator(of(true, true)));
         User user = new User("bb", 1);
         line.move(user);
+
         // when & then
         assertThat(user.getState()).isEqualTo(0);
     }
@@ -53,6 +53,7 @@ class LineTest {
         Line line = new Line(4, new TestBooleanGenerator(of(true, true)));
         User user = new User("cc", 2);
         line.move(user);
+
         // when & then
         assertThat(user.getState()).isEqualTo(3);
     }

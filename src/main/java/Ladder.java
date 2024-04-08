@@ -5,6 +5,7 @@ public class Ladder {
 
     private final List<Line> lines = new ArrayList<>();
 
+
     public Ladder(int personCount, int height, BooleanGenerator generator) {
         initLadder(personCount, height, generator);
     }
@@ -15,15 +16,15 @@ public class Ladder {
         }
     }
 
-    public void generatorUserResult(User user) {
-        for (Line line : lines) {
-            line.move(user);
+    public void generateAllResult(Users users) {
+        for (User user : users.getUsers()) {
+            generateUserResult(user);
         }
     }
 
-    public void generatorAllResult(Users users) {
-        for (User user : users.getUsers()) {
-            generatorUserResult(user);
+    private void generateUserResult(User user) {
+        for (Line line : lines) {
+            line.move(user);
         }
     }
 

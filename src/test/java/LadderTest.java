@@ -21,9 +21,10 @@ class LadderTest {
     void 유저의_개인별_결과를_반환한다() {
         // given
         Ladder ladder = new Ladder(4, 5, new TestBooleanGenerator(of(true, true, false, true, true, false, false, true, true, true)));
-        User user = new User("bb", 1);
+        Users users = new Users("aa",  "bb", "cc", "dd");
+        User user = users.getUserByUsername("bb");
         // when
-        ladder.generatorUserResult(user);
+        ladder.generateAllResult(users);
         // then
         assertThat(user.getState()).isEqualTo(3);
     }
@@ -35,7 +36,7 @@ class LadderTest {
         Users users = new Users("aa", "bb", "cc", "dd");
         List<Integer> result = List.of(0, 3, 2, 1);
         // when
-        ladder.generatorAllResult(users);
+        ladder.generateAllResult(users);
         // then
         for (int i = 0; i < 4; i++) {
             User user = users.getUsers().get(i);
